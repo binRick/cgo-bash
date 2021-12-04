@@ -2,7 +2,7 @@
 all: clean build run
 
 build:
-	passh -L .10-build-bash-release.log env ./build-bash-release.sh 3.2.57
+	passh -L .10-build-bash-release.log env ./build-bash-release.sh ${BUILD_BASH_VERSION}
 	passh -L .20-build-docs.log env ./build-docs.sh
 	passh -L .30-compile-libbash-shared-object.log env gcc -o ./RELEASE/lib/libbash.so -Wall -g -shared -fPIC -lm bash.c
 	color black green

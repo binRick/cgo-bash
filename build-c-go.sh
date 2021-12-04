@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 set -e
 cd $(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+source .envrc
 START_DIR="$(pwd)"
-DEFAULT_BASH_VERSION=3.2.57
-VERSION="${1:-$DEFAULT_BASH_VERSION}"
+VERSION="${1:-$BUILD_BASH_VERSION}"
 [ "$VERSION" == "" ] && echo "build.sh: must specify bash version to download" && exit 1
 command -v patch || dnf -y install patch
 bashsrc="bash-${VERSION}"
