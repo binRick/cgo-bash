@@ -8,13 +8,13 @@ build:
 	color black green
 	echo Build libbash.so
 	color reset
-	passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "cd ./bt/. && ./build.sh"
+	passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "cd ./cmd/basic/. && ./build.sh"
 #	gcc -o hello -L. hello.c -lperson
 #	color black cyan
 #	echo BUILT hello Binary from C
 #	color reset
 #	env CGO_ENABLED=1 go build -o main main.go
-#	env CGO_ENABLED=1 go build -o bt/main bt/main.go
+#	env CGO_ENABLED=1 go build -o cmd/basic/main cmd/basic/main.go
 #	color black magenta
 #	echo BUILT main Binary from GO
 #	color reset
@@ -23,7 +23,7 @@ run:
 	color black blue
 	ls -altr libbash.so
 	passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "env LD_LIBRARY_PATH=./RELEASE/lib ./RELEASE/bin/main" | grep 'Hello from Go'
-	ls -altr bt/main
+	ls -altr cmd/basic/main
 	color reset
 	color black yellow
 #	./main
