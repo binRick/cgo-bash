@@ -5,3 +5,5 @@ c.go
 libbash.so
 .*-*.log
 bin/*
+RELEASE/bin/*
+RELEASE/lib/*

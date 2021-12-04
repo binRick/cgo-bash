@@ -9,8 +9,12 @@ bashsrc="bash-${VERSION}"
 archive="$bashsrc.tar.gz"
 shasum="$archive.sha256"
 
-[[ -d ./bin ]] || mkdir -p ./bin
-[[ -d ./lib ]] || mkdir -p ./lib
+RELEASE_DIR="$(cd ./. && pwd)/RELEASE"
+BIN_DIR=$RELEASE_DIR/bin
+LIB_DIR=$RELEASE_DIR/lib
+
+[[ -d $BIN_DIR ]] || mkdir -p $BIN_DIR
+[[ -d $LIB_DIR ]] || mkdir -p $LIB_DIR
 if [ ! -f "$archive" ]; then
 	wget "https://ftp.gnu.org/gnu/bash/$archive"
 fi
@@ -30,11 +34,9 @@ fi
 	cd "${bashsrc}"
 	[ -f config.status ] || ./configure
 	make static
-  (
-    pwd
-    make strip
-    rsync ./bash ../bin/bash
-  )
+  rsync ./libbash.a $LIB_DIR/libbash.a
+  make strip
+  rsync ./bash $BIN_DIR/bash
 	ldflags=$(make ldflags | tail -1 | sed -E "s%\./%\${SRCDIR}/${bashsrc}/%g")
 
 	ldflags=$(
