@@ -8,9 +8,8 @@ build:
 	color black green
 	echo Build libbash.so
 	color reset
-#	passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "cd ./cmd/basic/. && ./build.sh"
 	passh -L .40-build-c-go-sh.log ./build-c-go.sh
-	passh -L .50-build-basic-cgo-binary.log env CGO_ENABLED=1 go build -a -v -o RELEASE/bin/basic cmd/basic/main.go
+	passh -L .50-build-basic-cgo-binary.log /bin/bash --norc --noprofile -c "cd ./cmd/basic/. && CGO_ENABLED=1 go build -a -v -o ../../RELEASE/bin/basic main.go"
 #	gcc -o hello -L. hello.c -lperson
 #	color black cyan
 #	echo BUILT hello Binary from C

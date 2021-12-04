@@ -2,6 +2,6 @@ module basic
 
 go 1.17
 
-require github.com/tiborvass/cgo-bash v0.0.0-20180315213718-51abcf1f4edc
+replace local.dev/cgo-bash => ./../../.
 
-replace github.com/tiborvass/cgo-bash => ./../../.
+require local.dev/cgo-bash v0.0.0-00010101000000-000000000000

@@ -2,7 +2,7 @@ package main
 
 /*
 #cgo CFLAGS: -g -Wall -fPIC
-#cgo LDFLAGS: -L.
+#cgo LDFLAGS: -L./../../RELEASE/lib
 #include "./../../bash.c"
 */
 import "C"
@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"os"
 
-	bash "github.com/tiborvass/cgo-bash"
+	bash "local.dev/cgo-bash"
 )
 
 func ExampleRegister() {
