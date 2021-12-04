@@ -1,5 +1,5 @@
 #!/bin/bash
-
+command -v patch || dnf -y install patch
 VERSION="$1"
 [ -z "$VERSION" ] && echo "build.sh: must specify bash version to download" && exit 1
 
