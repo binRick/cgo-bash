@@ -34,11 +34,11 @@ fi
 	cd "${bashsrc}"
 	[ -f config.status ] || ./configure
 	make static
-  make strip
+	make strip
 
-set -x
-  rsync ./libbash.a $LIB_DIR/libbash.a
-  rsync ./bash $BIN_DIR/bash
+	set -x
+	rsync ./libbash.a $LIB_DIR/libbash.a
+	rsync ./bash $BIN_DIR/bash
 
 	ldflags=$(make ldflags | tail -1 | sed -E "s%\./%\${SRCDIR}/${bashsrc}/%g")
 	ldflags=$(
@@ -47,15 +47,15 @@ set -x
 		done
 	)
 
-#  if [[ ! -f "$START_DIR/c.go" ]]; then
-cat << EOF > $START_DIR/c.go
+	#  if [[ ! -f "$START_DIR/c.go" ]]; then
+	cat <<EOF >$START_DIR/c.go
       package bash
 
       // #cgo LDFLAGS: ${ldflags}
       import "C"
 EOF
-    gofmt -w $START_DIR/c.go
-#  fi
+	gofmt -w $START_DIR/c.go
+	#  fi
 )
 
 # always rebuild because Go doesn't know if C files/libraries have changed

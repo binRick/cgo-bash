@@ -23,17 +23,18 @@ LIB_DIR=$RELEASE_DIR/lib
 	ldflags="$(
 		for ldflag in $ldflags; do
 			[ "${ldflag:0:1}" == "-" ] && echo -n "$ldflag " || echo -n "\${SRCDIR}/${bashsrc}/${ldflag} "
-		done)"
+		done
+	)"
 
-#  if [[ ! -f "$START_DIR/c.go" ]]; then
-cat << EOF > $START_DIR/c.go
+	#  if [[ ! -f "$START_DIR/c.go" ]]; then
+	cat <<EOF >$START_DIR/c.go
       package bash
 
       // #cgo LDFLAGS: ${ldflags}
       import "C"
 EOF
-    gofmt -w $START_DIR/c.go
-#  fi
+	gofmt -w $START_DIR/c.go
+	#  fi
 )
 
 # always rebuild because Go doesn't know if C files/libraries have changed
