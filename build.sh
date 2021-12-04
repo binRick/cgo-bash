@@ -11,7 +11,7 @@ if [ ! -f "$archive" ]; then
 	wget "https://ftp.gnu.org/gnu/bash/$archive"
 fi
 
-shasum -c "$shasum" || exit 1
+#shasum -c "$shasum" || exit 1
 if [ ! -d "$bashsrc" ]; then
 	(
 		tar zxf "$archive"

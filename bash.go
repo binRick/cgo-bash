@@ -1,16 +1,14 @@
 package bash
 
-//go:generate bash build.sh 3.2.57
-//go:generate bash doc.sh
-
-//#include "bash.h"
-import "C"
 import (
 	"fmt"
 	"reflect"
 	"sync"
 	"unsafe"
 )
+
+//#include "bash.c"
+import "C"
 
 var (
 	// mutex to guard the fns map

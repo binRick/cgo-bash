@@ -1,11 +1,11 @@
-package bash_test
+package main
 
 /*
-#cgo CFLAGS: -g -Wall
-#cgo LDFLAGS: -L. -llibbash
-#include "bash.h"
+#cgo CFLAGS: -g -Wall -fPIC
+#cgo LDFLAGS: -L.
+#include "../bash.c"
 */
-
+import "C"
 import (
 	"fmt"
 	"os"
@@ -25,4 +25,9 @@ func ExampleRegister() {
 func hello(args ...string) (status int) {
 	fmt.Printf("Hello from Go! args=%v\n", args)
 	return 42
+}
+
+func main() {
+	fmt.Println("CGO MAIN")
+	ExampleRegister()
 }
