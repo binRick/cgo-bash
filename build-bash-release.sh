@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 set -e
 cd $(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+source .envrc
 START_DIR="$(pwd)"
 VERSION="${1:-$BUILD_BASH_VERSION}"
 [ "$VERSION" == "" ] && echo "build.sh: must specify bash version to download" && exit 1
