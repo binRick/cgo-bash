@@ -29,12 +29,11 @@ color reset
 )
 
 color black blue
-passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "env LD_LIBRARY_PATH=$LIB_DIR $BIN_DIR/main"
+passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "env LD_LIBRARY_PATH=$LIB_DIR $BIN_DIR/basic"
 
 
 ls -altr $LIB_DIR/.
 ls -altr $BIN_DIR/.
 color reset
 color black yellow
-# ./main
 color reset
