@@ -22,15 +22,18 @@ color reset
 #passh -L .40-build-c-go-sh.log /bin/bash --norc --noprofile -c "./build-c-go.sh"
 ./build-c-go.sh
 (
-  cd $START_DIR/cmd/basic/. 
-  LD_LIBRARY_PATH=$START_DIR/RELEASE/lib 
-  CGO_ENABLED=1 go build -a -v -o $START_DIR/RELEASE/bin/basic main.go
+  export LD_LIBRARY_PATH=$LIB_DIR 
+  export CGO_ENABLED=1 
+  cd $RELEASE_DIR/../cmd/basic/. 
+  command go build -a -v -o $BIN_DIR/basic main.go
 )
 
 color black blue
-ls -altr ./RELEASE/lib/libbash.so
-passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "env LD_LIBRARY_PATH=$START_DIR/RELEASE/lib $START_DIR/RELEASE/bin/main" | grep 'Hello from Go'
-ls -altr ./RELEASE/bin/basic
+passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "env LD_LIBRARY_PATH=$LIB_DIR $BIN_DIR/main"
+
+
+ls -altr $LIB_DIR/.
+ls -altr $BIN_DIR/.
 color reset
 color black yellow
 # ./main
