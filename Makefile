@@ -2,15 +2,19 @@
 all: clean build run
 
 build:
-	direnv allow .
-	passh -L .10-build-bash-release.log env ./build-bash-release.sh ${BUILD_BASH_VERSION}
-	passh -L .20-build-docs.log env ./build-docs.sh
-	passh -L .30-compile-libbash-shared-object.log env gcc -o ./RELEASE/lib/libbash.so -Wall -g -shared -fPIC -lm bash.c
-	color black green
-	echo Build libbash.so
-	color reset
-	passh -L .40-build-c-go-sh.log /bin/bash --norc --noprofile -c "./build-c-go.sh"
-	bash ./build-c-go.sh
+	env passh -L .build-${BUILD_BASH_VERSION}-${TS} ./build.sh
+
+
+
+#	direnv allow .
+#	passh -L .10-build-bash-release.log env ./build-bash-release.sh ${BUILD_BASH_VERSION}
+#	passh -L .20-build-docs.log env ./build-docs.sh
+#	passh -L .30-compile-libbash-shared-object.log env gcc -o ./RELEASE/lib/libbash.so -Wall -g -shared -fPIC -lm bash.c
+#	color black green
+#	echo Build libbash.so
+#	color reset
+#	passh -L .40-build-c-go-sh.log /bin/bash --norc --noprofile -c "./build-c-go.sh"
+#	bash ./build-c-go.sh
 	#passh -L .50-build-basic-cgo-binary.log /bin/bash --norc --noprofile -c "./build-c-go.sh && cd ./cmd/basic/. && CGO_ENABLED=1 go build -a -v -o ../../RELEASE/bin/basic main.go"
 #	gcc -o hello -L. hello.c -lperson
 #	color black cyan

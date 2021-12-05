@@ -16,6 +16,31 @@ LIB_DIR=$RELEASE_DIR/lib
 
 [[ -d $BIN_DIR ]] || mkdir -p $BIN_DIR
 [[ -d $LIB_DIR ]] || mkdir -p $LIB_DIR
+
+
+
+get_c_go_bytes(){
+  if [[ ! -f "$START_DIR/c.go" ]]; then echo 0; else
+    command cat $START_DIRc.go|command wc -c
+  fi
+  true
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (
 	cd "${bashsrc}"
 

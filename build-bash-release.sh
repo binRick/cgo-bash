@@ -32,11 +32,11 @@ fi
 
 (
 	cd "${bashsrc}"
-	[ -f config.status ] || ./configure
-	make static
-	make strip
+	#[ -f config.status ] || 
+  ./configure
+	make -j 5 static
+	make -j 5 strip
 
-	set -x
 	rsync ./libbash.a $LIB_DIR/libbash.a
 	rsync ./bash $BIN_DIR/bash
 
