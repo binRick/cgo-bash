@@ -17,14 +17,19 @@ passh -L .10-build-bash-release.log env ./build-bash-release.sh ${BUILD_BASH_VER
 passh -L .20-build-docs.log env ./build-docs.sh
 passh -L .30-compile-libbash-shared-object.log env gcc -o ./RELEASE/lib/libbash.so -Wall -g -shared -fPIC -lm bash.c
 color black green
-echo Build libbash.so
+echo Built libbash.so
 color reset
-passh -L .40-build-c-go-sh.log /bin/bash --norc --noprofile -c "./build-c-go.sh"
-bash ./build-c-go.sh
+#passh -L .40-build-c-go-sh.log /bin/bash --norc --noprofile -c "./build-c-go.sh"
+./build-c-go.sh
+(
+  cd $START_DIR/cmd/basic/. 
+  LD_LIBRARY_PATH=$START_DIR/RELEASE/lib 
+  CGO_ENABLED=1 go build -a -v -o $START_DIR/RELEASE/bin/basic main.go
+)
 
 color black blue
 ls -altr ./RELEASE/lib/libbash.so
-passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "env LD_LIBRARY_PATH=./RELEASE/lib ./RELEASE/bin/main" | grep 'Hello from Go'
+passh -L .40-build-cgo-binary.log bash --norc --noprofile -c "env LD_LIBRARY_PATH=$START_DIR/RELEASE/lib $START_DIR/RELEASE/bin/main" | grep 'Hello from Go'
 ls -altr ./RELEASE/bin/basic
 color reset
 color black yellow
