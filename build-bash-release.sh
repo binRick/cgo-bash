@@ -32,12 +32,11 @@ fi
 
 (
 	cd "${bashsrc}"
-	#[ -f config.status ] || 
   do_configure(){
-    (cd $RELEASE_DIR/$bashsrc/. && ./configure)
+    (cd $RELEASE_DIR/../$bashsrc/. && ./configure)
   }
-	make -j 5 static || { do_configure && make -j 5 static; } 
-	make -j 5 strip || { do_configure && make -j 5 strip; } 
+	make static || { do_configure && make -j 5 static; } 
+	make strip || { do_configure && make -j 5 strip; } 
 
 	rsync ./libbash.a $LIB_DIR/libbash.a
 	rsync ./bash $BIN_DIR/bash
